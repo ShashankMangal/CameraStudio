@@ -4,9 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.WallpaperManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -22,12 +27,16 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 public class ResultScreen extends AppCompatActivity {
 
     private ActivityResultScreenBinding binding;
     private InterstitialAd mInterstitialAd;
     private String TAG = "Ad Status";
     private int BACK_REQUEST_CODE = 100;
+    private WallpaperManager wallpaperManager;
 
 
     @Override
@@ -38,6 +47,10 @@ public class ResultScreen extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
+        wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+
+
+
         binding.finalImage.setImageURI(getIntent().getData());
         binding.homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +60,65 @@ public class ResultScreen extends AppCompatActivity {
                 finish();
             }
         });
+
+        binding.shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(getApplicationContext(), "Share Result", Toast.LENGTH_SHORT).show();
+
+                Uri uri = getIntent().getData();
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("image/*");
+                intent.putExtra(Intent.EXTRA_STREAM,uri);
+                startActivity(Intent.createChooser(intent,"Share"));
+
+            }
+        });
+
+        binding.wallpaperButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Wallpaper Applied", Toast.LENGTH_SHORT).show();
+
+                try {
+                    Bitmap bitmap = ((BitmapDrawable) binding.finalImage.getDrawable()).getBitmap();
+                    wallpaperManager.setBitmap(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+
+
+
+
+        binding.whatsappButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(getApplicationContext(), "Share On WhatsApp", Toast.LENGTH_SHORT).show();
+
+                Uri uri = getIntent().getData();
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setPackage("com.whatsapp");
+                intent.setType("image/*");
+                intent.putExtra(Intent.EXTRA_STREAM,uri);
+                try {
+                    startActivity(intent);
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
 
         binding.backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,5 +196,10 @@ public class ResultScreen extends AppCompatActivity {
 
         }
 
+    }
+    private String getExifTag(ExifInterface exif,String tag){
+        String attribute = exif.getAttribute(tag);
+
+        return (null != attribute ? attribute : "");
     }
 }

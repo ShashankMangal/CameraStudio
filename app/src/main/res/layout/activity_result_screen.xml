@@ -47,36 +47,25 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/grey_oval"
         android:padding="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/facebookButton"
+        app:layout_constraintEnd_toStartOf="@+id/whatsappButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/finalImage"
         app:srcCompat="@drawable/ic_share" />
 
     <ImageView
-        android:id="@+id/facebookButton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toStartOf="@+id/whatsappButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/shareButton"
-        app:layout_constraintTop_toBottomOf="@+id/finalImage"
-        app:srcCompat="@drawable/ic_facebook" />
-
-    <ImageView
         android:id="@+id/whatsappButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toStartOf="@+id/instagramButton"
+        app:layout_constraintEnd_toStartOf="@+id/wallpaperButton"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/facebookButton"
+        app:layout_constraintStart_toEndOf="@+id/shareButton"
         app:layout_constraintTop_toBottomOf="@+id/finalImage"
         app:srcCompat="@drawable/ic_whatsapp" />
 
     <ImageView
-        android:id="@+id/instagramButton"
+        android:id="@+id/wallpaperButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
@@ -84,5 +73,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/whatsappButton"
         app:layout_constraintTop_toBottomOf="@+id/finalImage"
-        app:srcCompat="@drawable/ic_instagram" />
+        app:srcCompat="@drawable/wallpaper" />
 </androidx.constraintlayout.widget.ConstraintLayout>

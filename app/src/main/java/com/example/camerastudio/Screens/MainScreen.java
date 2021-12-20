@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity;
 import com.dsphotoeditor.sdk.utils.DsPhotoEditorConstants;
@@ -60,6 +61,13 @@ public class MainScreen extends AppCompatActivity {
             }
         });
 
+        binding.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Settings under Development.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         binding.cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +102,7 @@ public class MainScreen extends AppCompatActivity {
                 startActivityForResult(dsPhotoEditorIntent, RESULT_CODE);
             }
         }
+
 
         if(requestCode == RESULT_CODE)
         {

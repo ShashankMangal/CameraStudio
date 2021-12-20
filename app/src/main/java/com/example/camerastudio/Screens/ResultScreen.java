@@ -1,14 +1,18 @@
 package com.example.camerastudio.Screens;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity;
+import com.dsphotoeditor.sdk.utils.DsPhotoEditorConstants;
 import com.example.camerastudio.R;
 import com.example.camerastudio.databinding.ActivityResultScreenBinding;
 import com.google.android.gms.ads.AdError;
@@ -23,6 +27,7 @@ public class ResultScreen extends AppCompatActivity {
     private ActivityResultScreenBinding binding;
     private InterstitialAd mInterstitialAd;
     private String TAG = "Ad Status";
+    private int BACK_REQUEST_CODE = 100;
 
 
     @Override
@@ -40,6 +45,20 @@ public class ResultScreen extends AppCompatActivity {
                 startActivity(new Intent(ResultScreen.this , MainScreen.class));
                 Toast.makeText(getApplicationContext(), "Image Saved..", Toast.LENGTH_SHORT).show();
                 finish();
+            }
+        });
+
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Uri filePath = getIntent().getData();
+                Intent dsPhotoEditorIntent = new Intent(ResultScreen.this, DsPhotoEditorActivity.class);
+                dsPhotoEditorIntent.setData(filePath);
+                dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY, "CameraStudio");
+                int[] toolsToHide = {DsPhotoEditorActivity.TOOL_ORIENTATION, DsPhotoEditorActivity.TOOL_CROP};
+                dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
+                startActivityForResult(dsPhotoEditorIntent, BACK_REQUEST_CODE);
             }
         });
 
@@ -94,5 +113,16 @@ public class ResultScreen extends AppCompatActivity {
                         mInterstitialAd = null;
                     }
                 });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == BACK_REQUEST_CODE) {
+            binding.finalImage.setImageURI(data.getData());
+
+        }
+
     }
 }

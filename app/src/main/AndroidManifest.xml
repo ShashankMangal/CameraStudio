@@ -17,6 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CameraStudio">
         <activity
+            android:name=".PrivacyPolicy.PrivacyPolicyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Screens.MenuScreen"
+            android:exported="false" />
+        <activity
             android:name=".Screens.SplashScreen"
             android:exported="true">
             <intent-filter>

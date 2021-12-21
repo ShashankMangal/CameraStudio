@@ -1,5 +1,6 @@
 package com.example.camerastudio.Screens;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -11,6 +12,9 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -64,7 +68,8 @@ public class MainScreen extends AppCompatActivity {
         binding.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Settings under Development.", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainScreen.this, MenuScreen.class));
+                finish();
             }
         });
 
@@ -130,4 +135,6 @@ public class MainScreen extends AppCompatActivity {
         String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Title",null);
         return Uri.parse(path);
     }
+
+
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.camerastudio">
+    package="com.sharkBytesLab.camerastudio">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
@@ -17,19 +17,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CameraStudio">
         <activity
-            android:name=".Screens.FeedbackScreen"
+            android:name="com.sharkBytesLab.camerastudio.Screens.FeedbackScreen"
             android:exported="false" />
         <activity
-            android:name=".PrivacyPolicy.TermsActivity"
+            android:name="com.sharkBytesLab.camerastudio.PrivacyPolicy.TermsActivity"
             android:exported="false" />
         <activity
-            android:name=".PrivacyPolicy.PrivacyPolicyActivity"
+            android:name="com.sharkBytesLab.camerastudio.PrivacyPolicy.PrivacyPolicyActivity"
             android:exported="false" />
         <activity
-            android:name=".Screens.MenuScreen"
+            android:name="com.sharkBytesLab.camerastudio.Screens.MenuScreen"
             android:exported="false" />
         <activity
-            android:name=".Screens.SplashScreen"
+            android:name="com.sharkBytesLab.camerastudio.Screens.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,13 +43,13 @@
             android:value="ca-app-pub-5127713321341585~5095293902" />
 
         <activity
-            android:name=".Screens.ResultScreen"
+            android:name="com.sharkBytesLab.camerastudio.Screens.ResultScreen"
             android:exported="true" />
         <activity
-            android:name=".Screens.MainScreen"
+            android:name="com.sharkBytesLab.camerastudio.Screens.MainScreen"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.sharkBytesLab.camerastudio.MainActivity"
             android:exported="true" />
         <activity
             android:name="com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity"

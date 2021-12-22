@@ -103,6 +103,14 @@ public class ResultScreen extends AppCompatActivity {
             }
         });
 
+        binding.closeText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finishAffinity();
+                System.exit(0);
+            }
+        });
+
 
 
 

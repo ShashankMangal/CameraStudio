@@ -74,4 +74,21 @@
         app:layout_constraintStart_toEndOf="@+id/whatsappButton"
         app:layout_constraintTop_toBottomOf="@+id/finalImage"
         app:srcCompat="@drawable/wallpaper" />
+
+    <TextView
+        android:id="@+id/closeText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_red"
+        android:fontFamily="@font/roboto_black"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="Close"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/wallpaperButton"
+        app:layout_constraintStart_toStartOf="@+id/shareButton"
+        app:layout_constraintTop_toBottomOf="@+id/whatsappButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

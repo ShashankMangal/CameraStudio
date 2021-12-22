@@ -98,6 +98,15 @@ public class MenuScreen extends AppCompatActivity {
             }
         });
 
+        binding.version.setText("Version : "+String.valueOf(BuildConfig.VERSION_NAME));
+
+        binding.feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MenuScreen.this, FeedbackScreen.class));
+                finish();
+            }
+        });
 
     }
 

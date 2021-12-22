@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_mono"
         android:text="Free-Image-Editor"
+        android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/cameraStudioNameText"

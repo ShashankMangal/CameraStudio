@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.camerastudio.BuildConfig;
 import com.example.camerastudio.PrivacyPolicy.PrivacyPolicyActivity;
+import com.example.camerastudio.PrivacyPolicy.TermsActivity;
 import com.example.camerastudio.R;
 import com.example.camerastudio.databinding.ActivityMenuScreenBinding;
 
@@ -85,6 +86,15 @@ public class MenuScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MenuScreen.this, PrivacyPolicyActivity.class));
+                finish();
+            }
+        });
+
+        binding.terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MenuScreen.this , TermsActivity.class));
+                finish();
             }
         });
 

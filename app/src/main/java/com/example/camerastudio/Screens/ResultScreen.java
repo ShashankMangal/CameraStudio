@@ -47,11 +47,23 @@ public class ResultScreen extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
+        try {
+            Log.i("Image Source :",getIntent().getData().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
 
 
-
-        binding.finalImage.setImageURI(getIntent().getData());
+        if(getIntent().getData()!=null) {
+            binding.finalImage.setImageURI(getIntent().getData());
+        }
+        if(getIntent().getData() == null)
+        {
+            finishAffinity();
+            System.exit(0);
+        }
         binding.homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

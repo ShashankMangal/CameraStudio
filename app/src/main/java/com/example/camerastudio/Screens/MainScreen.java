@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,6 +38,7 @@ public class MainScreen extends AppCompatActivity {
     private int IMAGE_REQUEST_CODE = 45;
     private int CAMERA_REQUEST_CODE = 14;
     private int RESULT_CODE = 200;
+    boolean isPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,5 +138,26 @@ public class MainScreen extends AppCompatActivity {
         return Uri.parse(path);
     }
 
+    @Override
+    public void onBackPressed() {
 
+        if(isPressed)
+        {
+            finishAffinity();
+            System.exit(0);
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "Press back again to Exit.", Toast.LENGTH_SHORT).show();
+            isPressed = true;
+        }
+        Runnable runnable = new Runnable() {
+         @Override
+          public void run() {
+        isPressed = false;
+    }
+};
+        new Handler().postDelayed(runnable,2000);
+
+    }
 }

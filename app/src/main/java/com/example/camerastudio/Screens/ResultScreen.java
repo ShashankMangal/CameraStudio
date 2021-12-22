@@ -157,7 +157,7 @@ public class ResultScreen extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
 
 
-        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest,
+        InterstitialAd.load(this,"ca-app-pub-5127713321341585/8076680468", adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {

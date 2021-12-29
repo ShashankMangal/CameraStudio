@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Screens.FeedbackScreen"
-    android:background="@drawable/background"
+    android:background="@drawable/imageback"
     android:padding="6dp"
     android:orientation="vertical"
     >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +28,7 @@
             android:layout_marginTop="32dp"
             android:fontFamily="@font/roboto_black"
             android:text="Feedback &amp; Report Issue"
-            android:textColor="@color/ic_launcher_background"
+            android:textColor="@color/white"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,10 +50,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:fontFamily="@font/roboto_black"
+            android:fontFamily="@font/roboto_mono"
+            android:padding="15dp"
+            android:background="@drawable/gradient_blue"
             android:text="➼ If you are facing any issue then you can mail it to our Developer Team on 'shashankmangal10@gmail.com' \n\n➼ Our Team will contact you as soon as possible\n\n➼ Click on the REPORT button to raise your issue now  \n\n"
-            android:textColor="@color/purple_700"
-            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
             android:textStyle="normal" />
 
 
@@ -61,7 +64,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:background="@color/purple_700"
+            android:background="#084A7E"
+            app:backgroundTint="#084A7E"
+            android:backgroundTint="#084A7E"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:text="REPORT" />

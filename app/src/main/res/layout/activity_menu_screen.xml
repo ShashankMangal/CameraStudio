@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/imageback"
     tools:context=".Screens.MenuScreen">
 
     <TextView
@@ -15,7 +15,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_black"
         android:text="Camera Studio"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,7 @@
         android:fontFamily="@font/roboto_mono"
         android:textStyle="bold"
         android:text="Free-Image-Editor"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/cameraStudioMenuText"
         app:layout_constraintTop_toBottomOf="@+id/cameraStudioMenuText" />
@@ -163,7 +163,7 @@
         android:fontFamily="@font/roboto_mono"
         android:text="Powered By : Shark Bytes Lab"
         android:textColor="@color/white"
-        android:textSize="13sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/terms"
         app:layout_constraintStart_toStartOf="@+id/terms" />
@@ -174,7 +174,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_mono"
         android:text="Version : "
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/allInOneEditorMenuText"
         app:layout_constraintTop_toBottomOf="@+id/allInOneEditorMenuText" />

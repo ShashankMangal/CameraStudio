@@ -40,7 +40,7 @@ public class MenuScreen extends AppCompatActivity {
                 try {
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setType("text/plain");
-                    String shareMsg = "https://play.google.com/store/apps/details?=" + BuildConfig.APPLICATION_ID + "\n\n";
+                    String shareMsg = "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
                     intent.putExtra(Intent.EXTRA_SUBJECT, "Camera Studio : Free-Image-Editor");
                     intent.putExtra(Intent.EXTRA_TEXT, shareMsg);
                     startActivity(Intent.createChooser(intent, "Share Via"));
@@ -54,7 +54,7 @@ public class MenuScreen extends AppCompatActivity {
         binding.rateUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri = Uri.parse("https://play.google.com/store/apps/details?="+getApplicationContext().getPackageName());
+                Uri uri = Uri.parse("https://play.google.com/store/apps/details?id="+getApplicationContext().getPackageName());
                 Intent i = new Intent(Intent.ACTION_VIEW,uri);
 
                 try {
@@ -69,7 +69,7 @@ public class MenuScreen extends AppCompatActivity {
         binding.update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri = Uri.parse("https://play.google.com/store/apps/details?="+getApplicationContext().getPackageName());
+                Uri uri = Uri.parse("https://play.google.com/store/apps/details?id="+getApplicationContext().getPackageName());
                 Intent i = new Intent(Intent.ACTION_VIEW,uri);
 
                 try {

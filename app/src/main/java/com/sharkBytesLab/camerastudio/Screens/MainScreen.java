@@ -51,6 +51,14 @@ public class MainScreen extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
+        binding.compressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), CompressScreen.class));
+                finish();
+            }
+        });
+
         binding.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

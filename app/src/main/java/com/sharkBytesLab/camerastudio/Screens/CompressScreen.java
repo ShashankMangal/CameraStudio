@@ -9,14 +9,17 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Toast;
 import com.karumi.dexter.Dexter;
@@ -61,10 +64,18 @@ public class CompressScreen extends AppCompatActivity {
         if(!path.exists())
             path.mkdirs();
 
+        binding.backCompress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MainScreen.class));
+                finish();
+            }
+        });
+
         binding.seekQuality.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                binding.textQuality.setText("Quality : "+i);
+                binding.textQuality.setText("Quality : "+i+"%");
                 seekBar.setMax(100);
 
             }
@@ -91,26 +102,44 @@ public class CompressScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int quality = binding.seekQuality.getProgress();
-                int width = Integer.parseInt(binding.txtWidth.getText().toString());
-                int height = Integer.parseInt(binding.txtHeight.getText().toString());
+                if(quality == 0)
+                    quality = 10;
+
+                if(binding.txtHeight.getText().toString().isEmpty())
+                {
+                    binding.txtHeight.setError("Enter Height");
+                    binding.txtHeight.requestFocus();
+
+                }
+                else if(binding.txtWidth.getText().toString().isEmpty())
+                {
+                    binding.txtWidth.setError("Enter Width");
+                    binding.txtWidth.requestFocus();
+
+                }else{
+
+
 
                 try {
 
+                    int width = Integer.parseInt(binding.txtWidth.getText().toString());
+                    int height = Integer.parseInt(binding.txtHeight.getText().toString());
+
+
 
                     compressedImg = ShrinkBitmap(originalImage.toString(), width, height);
-                    binding.imgCompressed.setImageBitmap(compressedImg);
                     Uri location = saveImage(compressedImg);
                     compressedImage = new File(location.getPath());
-                    Log.d("Comp Img Loc: ",location.getPath().replace("raw/",""));
-                    binding.txtCompressed.setText("Size : "+ Formatter.formatShortFileSize(CompressScreen.this, compressedImage.length()));
-
-
+                    Toast.makeText(getApplicationContext(), "Compressed Image Saved.", Toast.LENGTH_SHORT).show();
 
 
                 } catch (Exception e) {
+                    Log.d("Try Error : ",e.getMessage());
                     e.printStackTrace();
                 }
 
+
+        }
             }
         });
     }
@@ -158,7 +187,6 @@ public class CompressScreen extends AppCompatActivity {
                 selectedImage = BitmapFactory.decodeStream(imageStream);
                 binding.imgOriginal.setImageBitmap(selectedImage);
                 originalImage = new File(imageUri.getPath().replace("raw/",""));
-                Log.d("Orig Img Loc: ",imageUri.getPath());
                 binding.txtOriginal.setText("Size : "+ Formatter.formatShortFileSize(this, originalImage.length()));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -212,9 +240,7 @@ public class CompressScreen extends AppCompatActivity {
             fos = resolver.openOutputStream(Objects.requireNonNull(imageUri));
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             Objects.requireNonNull(fos);
-            Log.d("fos : ",fos.toString());
-            Log.d("imageUri : ",imageUri.getPath());
-            Log.d("contentValues : ",contentValues.toString());
+
 
         }
         }catch(Exception e)
@@ -223,5 +249,6 @@ public class CompressScreen extends AppCompatActivity {
         }
         return imageUri;
     }
+
 
 }

@@ -11,7 +11,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.format.Formatter;
 import android.view.View;
+import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -25,6 +28,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
+
+import id.zelory.compressor.Compressor;
 
 public class CompressScreen extends AppCompatActivity {
 
@@ -50,10 +55,50 @@ public class CompressScreen extends AppCompatActivity {
         if(!path.exists())
             path.mkdirs();
 
+        binding.seekQuality.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                binding.textQuality.setText("Quality : "+i);
+                seekBar.setMax(100);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
         binding.pickButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openGallery();
+            }
+        });
+
+        binding.compressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int quality = binding.seekQuality.getProgress();
+                int width = Integer.parseInt(binding.txtWidth.getText().toString());
+                int height = Integer.parseInt(binding.txtHeight.getText().toString());
+
+                try {
+                    compressedImage = new Compressor(getApplicationContext())
+                            .setMaxWidth(width)
+                            .setMaxHeight(height)
+                            .setQuality(quality)
+                            .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                            .setDestinationDirectoryPath(filePath)
+                            .compressToFile(originalImage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
         });
     }
@@ -100,9 +145,15 @@ public class CompressScreen extends AppCompatActivity {
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 binding.imgOriginal.setImageBitmap(selectedImage);
+                originalImage = new File(imageUri.getPath().replace("raw/",""));
+                binding.txtOriginal.setText("Size : "+ Formatter.formatShortFileSize(this, originalImage.length()));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Something went Wrong!", Toast.LENGTH_SHORT).show();
             }
+        }else
+        {
+            Toast.makeText(getApplicationContext(), "No Image Selected!", Toast.LENGTH_SHORT).show();
         }
     }
 }

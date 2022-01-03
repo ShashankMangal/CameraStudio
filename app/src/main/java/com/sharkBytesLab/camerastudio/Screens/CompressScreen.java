@@ -57,6 +57,14 @@ public class CompressScreen extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
+
+
+        Runnable runnable1 = new Runnable() {
+            @Override
+            public void run() {
+
+
+
         askPermission();
 
         //code
@@ -142,6 +150,10 @@ public class CompressScreen extends AppCompatActivity {
         }
             }
         });
+            }
+        };
+        Thread thread1 = new Thread(runnable1);
+        thread1.start();
     }
 
     @Override

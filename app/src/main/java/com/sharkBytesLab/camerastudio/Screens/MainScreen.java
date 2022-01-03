@@ -103,55 +103,55 @@ public class MainScreen extends AppCompatActivity {
         Runnable runnable2 = new Runnable() {
             @Override
             public void run() {
-
-
-        if(requestCode == IMAGE_REQUEST_CODE)
-        {
-            if(data.getData() != null) {
                 try {
-                    Uri filePath = data.getData();
-                    Intent dsPhotoEditorIntent = new Intent(MainScreen.this, DsPhotoEditorActivity.class);
-                    dsPhotoEditorIntent.setData(filePath);
-                    dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY, "CameraStudio");
-                    int[] toolsToHide = {DsPhotoEditorActivity.TOOL_ORIENTATION, DsPhotoEditorActivity.TOOL_CROP};
-                    dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
-                    startActivityForResult(dsPhotoEditorIntent, RESULT_CODE);
-                }catch(Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
 
 
-        if(requestCode == RESULT_CODE)
-        {
-            try{
-            Intent intent = new Intent(MainScreen.this , ResultScreen.class);
-            intent.setData(data.getData());
-            startActivity(intent);
-            }catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
+                    if (requestCode == IMAGE_REQUEST_CODE) {
+                        if (data.getData() != null) {
+                            try {
+                                Uri filePath = data.getData();
+                                Intent dsPhotoEditorIntent = new Intent(MainScreen.this, DsPhotoEditorActivity.class);
+                                dsPhotoEditorIntent.setData(filePath);
+                                dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY, "CameraStudio");
+                                int[] toolsToHide = {DsPhotoEditorActivity.TOOL_ORIENTATION, DsPhotoEditorActivity.TOOL_CROP};
+                                dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
+                                startActivityForResult(dsPhotoEditorIntent, RESULT_CODE);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
 
-        if(requestCode == CAMERA_REQUEST_CODE)
-        {
-            try{
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            Uri uri = getImageUri(photo);
-            Intent dsPhotoEditorIntent = new Intent(MainScreen.this, DsPhotoEditorActivity.class);
-            dsPhotoEditorIntent.setData(uri);
-            dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY, "CameraStudio");
-            int[] toolsToHide = {DsPhotoEditorActivity.TOOL_ORIENTATION, DsPhotoEditorActivity.TOOL_CROP};
-            dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
-            startActivityForResult(dsPhotoEditorIntent, RESULT_CODE);
-            }catch(Exception e)
-            {
-                e.printStackTrace();
+
+                    if (requestCode == RESULT_CODE) {
+                        try {
+                            Intent intent = new Intent(MainScreen.this, ResultScreen.class);
+                            intent.setData(data.getData());
+                            startActivity(intent);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    if (requestCode == CAMERA_REQUEST_CODE) {
+                        try {
+                            Bitmap photo = (Bitmap) data.getExtras().get("data");
+                            Uri uri = getImageUri(photo);
+                            Intent dsPhotoEditorIntent = new Intent(MainScreen.this, DsPhotoEditorActivity.class);
+                            dsPhotoEditorIntent.setData(uri);
+                            dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY, "CameraStudio");
+                            int[] toolsToHide = {DsPhotoEditorActivity.TOOL_ORIENTATION, DsPhotoEditorActivity.TOOL_CROP};
+                            dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
+                            startActivityForResult(dsPhotoEditorIntent, RESULT_CODE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+            }catch(Exception exception){
+                exception.printStackTrace();
+
             }
-        }
             }
         };
         Thread thread2 = new Thread(runnable2);

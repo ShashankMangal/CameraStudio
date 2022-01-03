@@ -21,11 +21,14 @@ import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.sharkBytesLab.camerastudio.KotlinCode.CompressActivity;
 import com.sharkBytesLab.camerastudio.R;
 import com.sharkBytesLab.camerastudio.databinding.ActivityCompressScreenBinding;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.List;
 
@@ -88,13 +91,17 @@ public class CompressScreen extends AppCompatActivity {
                 int height = Integer.parseInt(binding.txtHeight.getText().toString());
 
                 try {
-                    compressedImage = new Compressor(getApplicationContext())
-                            .setMaxWidth(width)
-                            .setMaxHeight(height)
-                            .setQuality(quality)
-                            .setCompressFormat(Bitmap.CompressFormat.JPEG)
-                            .setDestinationDirectoryPath(filePath)
-                            .compressToFile(originalImage);
+                    //CompressorCode compress = new CompressorCode(getApplicationContext(), originalImage, filePath);
+//
+//                    compressedImage = new Compressor.INSTANCE.compress()
+//                            .setMaxWidth(width)
+//                            .setMaxHeight(height)
+//                            .setQuality(quality)
+//                            .setCompressFormat(Bitmap.CompressFormat.JPEG)
+//                            .setDestinationDirectoryPath(filePath)
+//                            .compressToFile(originalImage);
+
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

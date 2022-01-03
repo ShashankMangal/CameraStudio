@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CameraStudio">
         <activity
+            android:name=".KotlinCode.CompressActivity"
+            android:exported="false" />
+        <activity
             android:name=".Screens.CompressScreen"
             android:exported="false" />
         <activity

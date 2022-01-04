@@ -45,163 +45,171 @@ public class ResultScreen extends AppCompatActivity {
         getSupportActionBar().hide();
 
         try {
-            Log.i("Image Source :",getIntent().getData().toString());
+            Log.i("Image Source :", getIntent().getData().toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
-
-
-        if(getIntent().getData()!=null) {
-            binding.finalImage.setImageURI(getIntent().getData());
-        }
-        if(getIntent().getData() == null)
-        {
-            finishAffinity();
-            System.exit(0);
-        }
-        binding.homeButton.setOnClickListener(new View.OnClickListener() {
+        Runnable runnable3 = new Runnable() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ResultScreen.this , MainScreen.class));
-                Toast.makeText(getApplicationContext(), "Image Saved..", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
+            public void run() {
 
-        binding.shareButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Toast.makeText(getApplicationContext(), "Share Result", Toast.LENGTH_SHORT).show();
-
-                Uri uri = getIntent().getData();
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("image/*");
-                intent.putExtra(Intent.EXTRA_STREAM,uri);
-                startActivity(Intent.createChooser(intent,"Share"));
-
-            }
-        });
-
-        binding.wallpaperButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Wallpaper Applied", Toast.LENGTH_SHORT).show();
 
                 try {
-                    Bitmap bitmap = ((BitmapDrawable) binding.finalImage.getDrawable()).getBitmap();
-                    wallpaperManager.setBitmap(bitmap);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-
-        binding.closeText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finishAffinity();
-                System.exit(0);
-            }
-        });
 
 
+                    wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
 
 
+                    if (getIntent().getData() != null) {
+                        binding.finalImage.setImageURI(getIntent().getData());
+                    }
+                    if (getIntent().getData() == null) {
+                        finishAffinity();
+                        System.exit(0);
+                    }
+                    binding.homeButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(ResultScreen.this, MainScreen.class));
+                            Toast.makeText(getApplicationContext(), "Image Saved..", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
 
-        binding.whatsappButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                    binding.shareButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
 
-                Toast.makeText(getApplicationContext(), "Share On WhatsApp", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Share Result", Toast.LENGTH_SHORT).show();
 
-                Uri uri = getIntent().getData();
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setPackage("com.whatsapp");
-                intent.setType("image/*");
-                intent.putExtra(Intent.EXTRA_STREAM,uri);
-                try {
-                    startActivity(intent);
-                }
-                catch(Exception e)
+                            Uri uri = getIntent().getData();
+                            Intent intent = new Intent(Intent.ACTION_SEND);
+                            intent.setType("image/*");
+                            intent.putExtra(Intent.EXTRA_STREAM, uri);
+                            startActivity(Intent.createChooser(intent, "Share"));
+
+                        }
+                    });
+
+                    binding.wallpaperButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(getApplicationContext(), "Wallpaper Applied", Toast.LENGTH_SHORT).show();
+
+                            try {
+                                Bitmap bitmap = ((BitmapDrawable) binding.finalImage.getDrawable()).getBitmap();
+                                wallpaperManager.setBitmap(bitmap);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+
+                    binding.closeText.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            finishAffinity();
+                            System.exit(0);
+                        }
+                    });
+
+
+                    binding.whatsappButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            Toast.makeText(getApplicationContext(), "Share On WhatsApp", Toast.LENGTH_SHORT).show();
+
+                            Uri uri = getIntent().getData();
+                            Intent intent = new Intent(Intent.ACTION_SEND);
+                            intent.setPackage("com.whatsapp");
+                            intent.setType("image/*");
+                            intent.putExtra(Intent.EXTRA_STREAM, uri);
+                            try {
+                                startActivity(intent);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+
+                    binding.backButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            Uri filePath = getIntent().getData();
+                            Intent dsPhotoEditorIntent = new Intent(ResultScreen.this, DsPhotoEditorActivity.class);
+                            dsPhotoEditorIntent.setData(filePath);
+                            dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY, "CameraStudio");
+                            int[] toolsToHide = {DsPhotoEditorActivity.TOOL_ORIENTATION, DsPhotoEditorActivity.TOOL_CROP};
+                            dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
+                            startActivityForResult(dsPhotoEditorIntent, BACK_REQUEST_CODE);
+                        }
+                    });
+
+                    AdRequest adRequest = new AdRequest.Builder().build();
+
+
+                    InterstitialAd.load(ResultScreen.this, "ca-app-pub-5127713321341585/8076680468", adRequest,
+                            new InterstitialAdLoadCallback() {
+                                @Override
+                                public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+
+                                    mInterstitialAd = interstitialAd;
+                                    mInterstitialAd.show(ResultScreen.this);
+                                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                        @Override
+                                        public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                            super.onAdFailedToShowFullScreenContent(adError);
+                                            Toast.makeText(ResultScreen.this, "Ads Failed to Load.", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        @Override
+                                        public void onAdShowedFullScreenContent() {
+                                            super.onAdShowedFullScreenContent();
+                                        }
+
+                                        @Override
+                                        public void onAdDismissedFullScreenContent() {
+                                            super.onAdDismissedFullScreenContent();
+                                        }
+
+                                        @Override
+                                        public void onAdImpression() {
+                                            super.onAdImpression();
+
+                                        }
+
+                                        @Override
+                                        public void onAdClicked() {
+                                            super.onAdClicked();
+                                            Toast.makeText(ResultScreen.this, "Ad Clicked.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                    Log.i(TAG, "onAdLoaded");
+
+                                }
+
+                                @Override
+                                public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                                    // Handle the error
+                                    Log.i(TAG, loadAdError.getMessage());
+                                    mInterstitialAd = null;
+                                }
+                            });
+                }catch (Exception e)
                 {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.d("Result Screen Error : ",e.getMessage());
                 }
-            }
-        });
+             }
+        };
 
-
-
-
-        binding.backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Uri filePath = getIntent().getData();
-                Intent dsPhotoEditorIntent = new Intent(ResultScreen.this, DsPhotoEditorActivity.class);
-                dsPhotoEditorIntent.setData(filePath);
-                dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_OUTPUT_DIRECTORY, "CameraStudio");
-                int[] toolsToHide = {DsPhotoEditorActivity.TOOL_ORIENTATION, DsPhotoEditorActivity.TOOL_CROP};
-                dsPhotoEditorIntent.putExtra(DsPhotoEditorConstants.DS_PHOTO_EDITOR_TOOLS_TO_HIDE, toolsToHide);
-                startActivityForResult(dsPhotoEditorIntent, BACK_REQUEST_CODE);
-            }
-        });
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-
-        InterstitialAd.load(this,"ca-app-pub-5127713321341585/8076680468", adRequest,
-                new InterstitialAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                        // The mInterstitialAd reference will be null until
-                        // an ad is loaded.
-                        mInterstitialAd = interstitialAd;
-                        mInterstitialAd.show(ResultScreen.this);
-                        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                            @Override
-                            public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                                super.onAdFailedToShowFullScreenContent(adError);
-                                Toast.makeText(ResultScreen.this, "Ads Failed to Load.", Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onAdShowedFullScreenContent() {
-                                super.onAdShowedFullScreenContent();
-                            }
-
-                            @Override
-                            public void onAdDismissedFullScreenContent() {
-                                super.onAdDismissedFullScreenContent();
-                            }
-
-                            @Override
-                            public void onAdImpression() {
-                                super.onAdImpression();
-
-                            }
-
-                            @Override
-                            public void onAdClicked() {
-                                super.onAdClicked();
-                                Toast.makeText(ResultScreen.this, "Ad Clicked.", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        Log.i(TAG, "onAdLoaded");
-
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Handle the error
-                        Log.i(TAG, loadAdError.getMessage());
-                        mInterstitialAd = null;
-                    }
-                });
+        Thread thread3 = new Thread(runnable3);
+        thread3.start();
     }
 
     @Override

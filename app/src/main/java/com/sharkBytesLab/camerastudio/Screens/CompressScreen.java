@@ -42,6 +42,7 @@ import java.util.Objects;
 public class CompressScreen extends AppCompatActivity {
 
     private ActivityCompressScreenBinding binding;
+    private  Thread thread1;
     private File originalImage, compressedImage;
     private static String filePath;
     Bitmap selectedImage, compressedImg;
@@ -111,7 +112,7 @@ public class CompressScreen extends AppCompatActivity {
             public void onClick(View view) {
                 int quality = binding.seekQuality.getProgress();
                 if(quality == 0)
-                    quality = 10;
+                    quality = 30;
 
                 if(binding.txtHeight.getText().toString().isEmpty())
                 {
@@ -152,7 +153,7 @@ public class CompressScreen extends AppCompatActivity {
         });
             }
         };
-        Thread thread1 = new Thread(runnable1);
+        thread1 = new Thread(runnable1);
         thread1.start();
     }
 
@@ -262,5 +263,11 @@ public class CompressScreen extends AppCompatActivity {
         return imageUri;
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
 
+        thread1.interrupt();
+
+    }
 }

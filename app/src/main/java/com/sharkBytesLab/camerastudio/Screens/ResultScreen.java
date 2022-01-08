@@ -34,6 +34,7 @@ public class ResultScreen extends AppCompatActivity {
     private String TAG = "Ad Status";
     private int BACK_REQUEST_CODE = 100;
     private WallpaperManager wallpaperManager;
+    private Thread thread3;
 
 
     @Override
@@ -208,7 +209,7 @@ public class ResultScreen extends AppCompatActivity {
              }
         };
 
-        Thread thread3 = new Thread(runnable3);
+        thread3 = new Thread(runnable3);
         thread3.start();
     }
 
@@ -226,5 +227,11 @@ public class ResultScreen extends AppCompatActivity {
         String attribute = exif.getAttribute(tag);
 
         return (null != attribute ? attribute : "");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        thread3.interrupt();
     }
 }

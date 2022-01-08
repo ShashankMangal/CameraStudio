@@ -61,6 +61,7 @@ public class CompressScreen extends AppCompatActivity {
 
 
         Runnable runnable1 = new Runnable() {
+
             @Override
             public void run() {
 
@@ -152,6 +153,8 @@ public class CompressScreen extends AppCompatActivity {
             }
         });
             }
+
+
         };
         thread1 = new Thread(runnable1);
         thread1.start();
@@ -263,11 +266,5 @@ public class CompressScreen extends AppCompatActivity {
         return imageUri;
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
 
-        thread1.interrupt();
-
-    }
 }

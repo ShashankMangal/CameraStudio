@@ -54,8 +54,9 @@ public class MainScreen extends AppCompatActivity {
         binding.compressButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), CompressScreen.class));
-                finish();
+//                startActivity(new Intent(getApplicationContext(), CompressScreen.class));
+//                finish();
+                Toast.makeText(getApplicationContext(), "This feature is under Maintenance", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -72,6 +73,7 @@ public class MainScreen extends AppCompatActivity {
         binding.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 startActivity(new Intent(MainScreen.this, MenuScreen.class));
                 finish();
             }

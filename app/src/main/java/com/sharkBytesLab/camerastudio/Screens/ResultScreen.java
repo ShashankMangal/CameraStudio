@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity;
@@ -34,7 +35,7 @@ public class ResultScreen extends AppCompatActivity {
     private String TAG = "Ad Status";
     private int BACK_REQUEST_CODE = 100;
     private WallpaperManager wallpaperManager;
-    private Thread thread3;
+
 
 
     @Override
@@ -45,15 +46,15 @@ public class ResultScreen extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
+        binding.progressBar.setVisibility(View.VISIBLE);
+
+
         try {
             Log.i("Image Source :", getIntent().getData().toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Runnable runnable3 = new Runnable() {
-            @Override
-            public void run() {
 
 
                 try {
@@ -162,16 +163,19 @@ public class ResultScreen extends AppCompatActivity {
 
                                     mInterstitialAd = interstitialAd;
                                     mInterstitialAd.show(ResultScreen.this);
+                                    binding.progressBar.setVisibility(View.GONE);
                                     mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                                         @Override
                                         public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
                                             super.onAdFailedToShowFullScreenContent(adError);
                                             Toast.makeText(ResultScreen.this, "Ads Failed to Load.", Toast.LENGTH_SHORT).show();
+
                                         }
 
                                         @Override
                                         public void onAdShowedFullScreenContent() {
                                             super.onAdShowedFullScreenContent();
+
                                         }
 
                                         @Override
@@ -206,12 +210,11 @@ public class ResultScreen extends AppCompatActivity {
                 {
                     Log.d("Result Screen Error : ",e.getMessage());
                 }
-             }
-        };
 
-        thread3 = new Thread(runnable3);
-        thread3.start();
-    }
+        }
+
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -229,9 +232,5 @@ public class ResultScreen extends AppCompatActivity {
         return (null != attribute ? attribute : "");
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        thread3.interrupt();
-    }
+
 }

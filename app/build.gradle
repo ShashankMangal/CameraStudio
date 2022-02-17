@@ -5,7 +5,6 @@ plugins {
 
 android {
     compileSdkVersion 31
-    buildToolsVersion "30.0.2"
 
     buildFeatures {
         viewBinding true
@@ -16,8 +15,8 @@ android {
         applicationId "com.sharkBytesLab.camerastudio"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 4
-        versionName "2.1.2"
+        versionCode 5
+        versionName "5.0.1"
         renderscriptTargetApi 21
 
         renderscriptSupportModeEnabled true
@@ -63,8 +62,7 @@ dependencies {
 
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
-
-    implementation 'com.google.android.gms:play-services-ads:20.5.0'
+    
     implementation 'org.sufficientlysecure:html-textview:4.0'
 
     implementation "com.airbnb.android:lottie:3.4.0"

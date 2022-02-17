@@ -45,9 +45,7 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5127713321341585~5095293902" />
+
 
         <activity
             android:name=".Screens.ResultScreen"

@@ -49,7 +49,7 @@
         android:layout_width="35dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        android:tint="@color/white"
+        app:tint="@color/white"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -68,17 +68,7 @@
         app:layout_constraintTop_toBottomOf="@+id/allInOneEditorText"
         app:layout_constraintVertical_bias="0.26999998" >
 
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
-            android:layout_margin="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            ads:adSize="MEDIUM_RECTANGLE"
-            ads:adUnitId="ca-app-pub-5127713321341585/7908502967">
-        </com.google.android.gms.ads.AdView>
+
     </androidx.cardview.widget.CardView>
 
     <ImageView

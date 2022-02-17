@@ -19,20 +19,12 @@ import android.widget.Toast;
 import com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity;
 import com.dsphotoeditor.sdk.utils.DsPhotoEditorConstants;
 import com.sharkBytesLab.camerastudio.databinding.ActivityResultScreenBinding;
-import com.google.android.gms.ads.AdError;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
 import java.io.IOException;
 
 public class ResultScreen extends AppCompatActivity {
 
     private ActivityResultScreenBinding binding;
-    private InterstitialAd mInterstitialAd;
-    private String TAG = "Ad Status";
     private int BACK_REQUEST_CODE = 100;
     private WallpaperManager wallpaperManager;
 
@@ -57,7 +49,6 @@ public class ResultScreen extends AppCompatActivity {
 
 
 
-                try {
 
 
                     wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
@@ -153,63 +144,7 @@ public class ResultScreen extends AppCompatActivity {
                         }
                     });
 
-                    AdRequest adRequest = new AdRequest.Builder().build();
 
-
-                    InterstitialAd.load(ResultScreen.this, "ca-app-pub-5127713321341585/8076680468", adRequest,
-                            new InterstitialAdLoadCallback() {
-                                @Override
-                                public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-
-                                    mInterstitialAd = interstitialAd;
-                                    mInterstitialAd.show(ResultScreen.this);
-                                    binding.progressBar.setVisibility(View.GONE);
-                                    mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                                        @Override
-                                        public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                                            super.onAdFailedToShowFullScreenContent(adError);
-                                            Toast.makeText(ResultScreen.this, "Ads Failed to Load.", Toast.LENGTH_SHORT).show();
-
-                                        }
-
-                                        @Override
-                                        public void onAdShowedFullScreenContent() {
-                                            super.onAdShowedFullScreenContent();
-
-                                        }
-
-                                        @Override
-                                        public void onAdDismissedFullScreenContent() {
-                                            super.onAdDismissedFullScreenContent();
-                                        }
-
-                                        @Override
-                                        public void onAdImpression() {
-                                            super.onAdImpression();
-
-                                        }
-
-                                        @Override
-                                        public void onAdClicked() {
-                                            super.onAdClicked();
-                                            Toast.makeText(ResultScreen.this, "Ad Clicked.", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                    Log.i(TAG, "onAdLoaded");
-
-                                }
-
-                                @Override
-                                public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                                    // Handle the error
-                                    Log.i(TAG, loadAdError.getMessage());
-                                    mInterstitialAd = null;
-                                }
-                            });
-                }catch (Exception e)
-                {
-                    Log.d("Result Screen Error : ",e.getMessage());
-                }
 
         }
 

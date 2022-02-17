@@ -10,13 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdError;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MediationUtils;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.sharkBytesLab.camerastudio.BuildConfig;
 import com.sharkBytesLab.camerastudio.PrivacyPolicy.PrivacyPolicyActivity;
 import com.sharkBytesLab.camerastudio.PrivacyPolicy.TermsActivity;
@@ -25,8 +18,6 @@ import com.sharkBytesLab.camerastudio.databinding.ActivityMenuScreenBinding;
 public class MenuScreen extends AppCompatActivity {
 
     private ActivityMenuScreenBinding binding;
-    private InterstitialAd mInterstitialAd;
-    private String TAG = "Ad Status";
 
 
     @Override
@@ -38,7 +29,7 @@ public class MenuScreen extends AppCompatActivity {
         getSupportActionBar().hide();
 
 
-        try {
+
 
         binding.homeButtonMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,66 +115,11 @@ public class MenuScreen extends AppCompatActivity {
         });
 
 
-        AdRequest adRequest = new AdRequest.Builder().build();
 
 
-        InterstitialAd.load(MenuScreen.this, "ca-app-pub-5127713321341585/1470579946", adRequest,
-                new InterstitialAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+            }
 
-                        mInterstitialAd = interstitialAd;
-                        mInterstitialAd.show(MenuScreen.this);
 
-                        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                            @Override
-                            public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                                super.onAdFailedToShowFullScreenContent(adError);
-                                Toast.makeText(MenuScreen.this, "Ads Failed to Load.", Toast.LENGTH_SHORT).show();
-
-                            }
-
-                            @Override
-                            public void onAdShowedFullScreenContent() {
-                                super.onAdShowedFullScreenContent();
-
-                            }
-
-                            @Override
-                            public void onAdDismissedFullScreenContent() {
-                                super.onAdDismissedFullScreenContent();
-                            }
-
-                            @Override
-                            public void onAdImpression() {
-                                super.onAdImpression();
-
-                            }
-
-                            @Override
-                            public void onAdClicked() {
-                                super.onAdClicked();
-                                Toast.makeText(MenuScreen.this, "Ad Clicked.", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        Log.i(TAG, "onAdLoaded");
-
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Handle the error
-                        Log.i(TAG, loadAdError.getMessage());
-                        mInterstitialAd = null;
-                    }
-                });
-    }catch(Exception e)
-
-    {
-        Log.d("Result Screen Error : ", e.getMessage());
-    }
-
-}
 
 
     @Override

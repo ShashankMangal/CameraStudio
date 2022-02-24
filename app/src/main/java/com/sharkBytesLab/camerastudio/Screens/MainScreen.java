@@ -15,6 +15,8 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Toast;
 
+import com.applovin.sdk.AppLovinSdk;
+import com.applovin.sdk.AppLovinSdkConfiguration;
 import com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity;
 import com.dsphotoeditor.sdk.utils.DsPhotoEditorConstants;
 import com.sharkBytesLab.camerastudio.databinding.ActivityMainScreenBinding;
@@ -39,6 +41,18 @@ public class MainScreen extends AppCompatActivity {
 
 
         getSupportActionBar().hide();
+
+        // Please make sure to set the mediation provider value to "max" to ensure proper functionality
+        AppLovinSdk.getInstance( this ).setMediationProvider( "max" );
+        AppLovinSdk.initializeSdk( this, new AppLovinSdk.SdkInitializationListener() {
+            @Override
+            public void onSdkInitialized(final AppLovinSdkConfiguration configuration)
+            {
+
+            }
+        } );
+
+        binding.applovinAd.loadAd();
 
         binding.compressButton.setOnClickListener(new View.OnClickListener() {
             @Override

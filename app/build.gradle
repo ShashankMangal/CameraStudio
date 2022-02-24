@@ -68,6 +68,8 @@ dependencies {
     implementation "com.airbnb.android:lottie:3.4.0"
     implementation 'com.karumi:dexter:6.2.3'
 
+    implementation 'com.applovin:applovin-sdk:+'
+
 
 
 

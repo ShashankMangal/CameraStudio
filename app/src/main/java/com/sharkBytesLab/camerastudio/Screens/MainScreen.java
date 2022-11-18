@@ -223,7 +223,6 @@ public class MainScreen extends AppCompatActivity implements MaxRewardedAdListen
 
         // Reset retry attempt
         Log.i(TAG, "Loaded");
-        showToast("Loading..");
         retryAttempt = 0;
     }
 

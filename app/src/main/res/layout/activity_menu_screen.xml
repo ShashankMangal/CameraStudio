@@ -37,7 +37,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/gradient_red"
         android:padding="15dp"
@@ -48,7 +48,7 @@
         android:textSize="19sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/allInOneEditorMenuText"
+        app:layout_constraintTop_toBottomOf="@+id/version"
          />
 
     <TextView
@@ -146,6 +146,25 @@
         app:layout_constraintTop_toBottomOf="@+id/feedback"
         />
 
+    <TextView
+        android:id="@+id/supportUs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/gradient_blue"
+        android:padding="15dp"
+        android:text="Support Us"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_black"
+        android:gravity="center"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/terms"
+        />
+
     <ImageView
         android:id="@+id/homeButtonMenu"
         android:layout_width="wrap_content"
@@ -164,9 +183,10 @@
         android:text="Powered By : Shark Bytes Lab"
         android:textColor="@color/white"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/terms"
-        app:layout_constraintStart_toStartOf="@+id/terms" />
+        app:layout_constraintBottom_toTopOf="@id/applovinAdMenu"
+        app:layout_constraintEnd_toEndOf="@+id/supportUs"
+        app:layout_constraintTop_toBottomOf="@+id/supportUs"
+        app:layout_constraintStart_toStartOf="@+id/supportUs" />
 
     <TextView
         android:id="@+id/version"
@@ -178,5 +198,16 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/allInOneEditorMenuText"
         app:layout_constraintTop_toBottomOf="@+id/allInOneEditorMenuText" />
+
+    <com.applovin.mediation.ads.MaxAdView
+        android:id="@+id/applovinAdMenu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        xmlns:maxads="http://schemas.applovin.com/android/1.0"
+        maxads:adUnitId="4e9ef022e6beb2cf"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+    </com.applovin.mediation.ads.MaxAdView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -57,6 +57,13 @@ public class MenuScreen extends AppCompatActivity implements MaxAdListener {
             }
         });
 
+        binding.watchVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MenuScreen.this, RewardActivity.class));
+            }
+        });
+
         binding.homeButtonMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

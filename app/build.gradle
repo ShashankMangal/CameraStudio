@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     buildFeatures {
         viewBinding true
@@ -14,9 +14,9 @@ android {
 
         applicationId "com.sharkBytesLab.camerastudio"
         minSdkVersion 21
-        targetSdkVersion 32
-        versionCode 12
-        versionName "12.2.7"
+        targetSdkVersion 33
+        versionCode 13
+        versionName "13.6.7"
         renderscriptTargetApi 21
 
         renderscriptSupportModeEnabled true

@@ -41,7 +41,7 @@ public class MenuScreen extends AppCompatActivity implements MaxAdListener {
         getSupportActionBar().hide();
 
         binding.applovinAdMenu.loadAd();
-        interstitialAd = new MaxInterstitialAd( "81e3415423b47939", this );
+        interstitialAd = new MaxInterstitialAd( "21bcb2275cf28dc3", this );
         interstitialAd.setListener( this );
         interstitialAd.loadAd();
 

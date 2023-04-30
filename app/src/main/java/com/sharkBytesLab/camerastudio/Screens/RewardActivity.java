@@ -28,7 +28,7 @@ public class RewardActivity extends AppCompatActivity implements MaxRewardedAdLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reward);
 
-        rewardedAd = MaxRewardedAd.getInstance("2e18c2fdcc65a654", this);
+        rewardedAd = MaxRewardedAd.getInstance("cc48d36a84430abb", this);
         rewardedAd.setListener(this);
         rewardedAd.loadAd();
 

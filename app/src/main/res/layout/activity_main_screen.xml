@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/allInOneEditorText"
         app:layout_constraintBottom_toTopOf="@+id/editButton"
         xmlns:maxads="http://schemas.applovin.com/android/1.0"
-        maxads:adUnitId="d1ac9635fb4a48ec"
+        maxads:adUnitId="227c4e6e03680a2a"
         android:layout_width="match_parent"
         android:layout_height="50dp">
     </com.applovin.mediation.ads.MaxAdView>

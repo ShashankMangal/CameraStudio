@@ -66,7 +66,7 @@ public class MainScreen extends AppCompatActivity implements MaxRewardedAdListen
             }
         } );
 
-        rewardedAd = MaxRewardedAd.getInstance("cc48d36a84430abb", this);
+        rewardedAd = MaxRewardedAd.getInstance("34eebb937b9e64ad", this);
         rewardedAd.setListener(this);
         rewardedAd.loadAd();
         binding.applovinAd.loadAd();

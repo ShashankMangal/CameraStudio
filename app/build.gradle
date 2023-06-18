@@ -15,8 +15,8 @@ android {
         applicationId "com.sharkBytesLab.camerastudio"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 14
-        versionName "14.6.21"
+        versionCode 15
+        versionName "15.14.21"
         renderscriptTargetApi 21
 
         renderscriptSupportModeEnabled true

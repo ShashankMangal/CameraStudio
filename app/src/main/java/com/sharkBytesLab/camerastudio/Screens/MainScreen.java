@@ -62,14 +62,15 @@ public class MainScreen extends AppCompatActivity implements MaxRewardedAdListen
             @Override
             public void onSdkInitialized(final AppLovinSdkConfiguration configuration)
             {
-
+                rewardedAd = MaxRewardedAd.getInstance("34eebb937b9e64ad", MainScreen.this);
+                rewardedAd.setListener(MainScreen.this);
+                rewardedAd.loadAd();
+                binding.applovinAd.loadAd();
             }
         } );
 
-        rewardedAd = MaxRewardedAd.getInstance("34eebb937b9e64ad", this);
-        rewardedAd.setListener(this);
-        rewardedAd.loadAd();
-        binding.applovinAd.loadAd();
+
+
 
         binding.compressButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,7 +231,7 @@ public class MainScreen extends AppCompatActivity implements MaxRewardedAdListen
     public void onAdLoadFailed(final String adUnitId, final MaxError error) {
         // Rewarded ad failed to load
         // We recommend retrying with exponentially higher delays up to a maximum delay (in this case 64 seconds)
-        Log.i(TAG, "Failed");
+        Log.i("Applovin error", error.getMessage());
         retryAttempt++;
         long delayMillis = TimeUnit.SECONDS.toMillis((long) Math.pow(2, Math.min(6, retryAttempt)));
 
@@ -244,7 +245,8 @@ public class MainScreen extends AppCompatActivity implements MaxRewardedAdListen
 
     @Override
     public void onAdDisplayFailed(final MaxAd maxAd, final MaxError error) {
-        Log.i(TAG, "Failed");
+        Log.i("Applovin med display", error.getMediatedNetworkErrorMessage());
+        Log.i("Applovin error display", error.getMessage());
         // Rewarded ad failed to display. We recommend loading the next ad
         rewardedAd.loadAd();
     }
